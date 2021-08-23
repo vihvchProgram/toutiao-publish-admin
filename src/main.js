@@ -7,8 +7,18 @@ import Vue from 'vue'
 import App from './App.vue'
 // 加載路由
 import router from './router'
+
+// 加載element-ui組件庫
+import ElementUI from 'element-ui'
+
+// 加載element-ui組件庫的樣式
+import 'element-ui/lib/theme-chalk/index.css'
+
 // 加載全局樣式文件
 import './styles/index.less'
+
+// 全局註冊element-ui組件庫
+Vue.use(ElementUI)
 
 // 關閉生產環境提示
 Vue.config.productionTip = false
