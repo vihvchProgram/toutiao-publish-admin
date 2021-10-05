@@ -71,6 +71,24 @@ export default {
         code: [
           { required: true, message: '驗證碼不能為空', trigger: 'change' },
           { pattern: /^\d{6}$/, message: '請輸入正確的驗證碼格式', trigger: 'change' }
+        ],
+        agree: [
+          {
+            // 自定義 表單 校驗規則
+            //   驗證通過: callback()
+            //   驗證失敗: callback(new Error('錯誤訊息'))
+            validator: (rule, value, callback) => {
+              console.log(rule)
+              if (!value) {
+                // 驗證失敗
+                callback(new Error('請勾選同意用戶協議'))
+                return
+              }
+              // 驗證通過
+              callback()
+            },
+            trigger: 'change'
+          }
         ]
       }
     }
