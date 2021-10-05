@@ -37,7 +37,7 @@ export default {
     return {
       user: {
         mobile: '13911111111', // 手機號
-        code: '24681', // 驗證碼
+        code: '246810', // 驗證碼
         agree: false // 是否同意協議的選中狀態
       }
     }
@@ -60,8 +60,14 @@ export default {
         data: user
       }).then(res => {
         console.log(res)
+        // 登入成功
+        this.$message({
+          message: '登入成功',
+          type: 'success'
+        })
       }).catch(err => {
         console.log('登入失敗', err)
+        this.$message.error('登入失敗, 手機號或驗證碼錯誤')
       })
     }
   }
