@@ -19,7 +19,12 @@
           <el-checkbox v-model="user.agree">我已閱讀並同意用戶協議和隱私條款</el-checkbox>
         </el-form-item>
         <el-form-item>
-          <el-button class="login-btn" type="primary" @click="onLogin">登入</el-button>
+          <el-button
+            class="login-btn"
+            type="primary"
+            :loading="loginLoading"
+            @click="onLogin"
+          >登入</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -39,7 +44,8 @@ export default {
         mobile: '13911111111', // 手機號
         code: '246810', // 驗證碼
         agree: false // 是否同意協議的選中狀態
-      }
+      },
+      loginLoading: false // 登入的 loading 狀態
     }
   },
   computed: {},
@@ -52,6 +58,8 @@ export default {
       const user = this.user
       // 表單驗證
       // 驗證通過，提交登入
+      // 開啟登入中 loading ...
+      this.loginLoading = true
       // 處理後端響應結果
       request({
         method: 'POST',
@@ -65,9 +73,13 @@ export default {
           message: '登入成功',
           type: 'success'
         })
+        // 關閉 loading
+        this.loginLoading = false
       }).catch(err => {
         console.log('登入失敗', err)
         this.$message.error('登入失敗, 手機號或驗證碼錯誤')
+        // 關閉 loading
+        this.loginLoading = false
       })
     }
   }
