@@ -19,7 +19,7 @@
           <el-checkbox v-model="user.agree">我已閱讀並同意用戶協議和隱私條款</el-checkbox>
         </el-form-item>
         <el-form-item>
-          <el-button class="login-btn" type="primary" @click="onSubmit">登入</el-button>
+          <el-button class="login-btn" type="primary" @click="onLogin">登入</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import request from '@/utils/request'
+
 export default {
   name: 'LoginIndex',
   components: {},
@@ -34,8 +36,8 @@ export default {
   data () {
     return {
       user: {
-        mobile: '', // 手機號
-        code: '', // 驗證碼
+        mobile: '13911111111', // 手機號
+        code: '24681', // 驗證碼
         agree: false // 是否同意協議的選中狀態
       }
     }
@@ -45,8 +47,22 @@ export default {
   created () {},
   mounted () {},
   methods: {
-    onSubmit () {
-      console.log('submit!')
+    onLogin () {
+      // 獲取表單數據 (根據接口要求綁定數據)
+      const user = this.user
+      // 表單驗證
+      // 驗證通過，提交登入
+      // 處理後端響應結果
+      request({
+        method: 'POST',
+        url: '/mp/v1_0/authorizations',
+        // data 用來設置POST請求體
+        data: user
+      }).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log('登入失敗', err)
+      })
     }
   }
 }
