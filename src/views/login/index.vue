@@ -10,8 +10,17 @@
         2. 給需要驗證的表單項el-form-item 綁定 prop屬性
           注意: prop屬性 需要指定為 表單對象中的 數據名稱
         3. 通過 el-form組件的rules屬性 配置驗證規則
+
+        手動觸發 表單驗證:
+        1. 給 el-form 設置 ref (名字隨便取, 不要重複即可)
+        2. 通過 ref 獲取 el-form組件, 調用 組件的 validate方法 進行驗證
       -->
-      <el-form class="login-form" ref="form" :model="user" :rules="formRules">
+      <el-form
+        class="login-form"
+        ref="login-form"
+        :model="user"
+        :rules="formRules"
+      >
         <el-form-item prop="mobile">
           <el-input v-model="user.mobile"
                     placeholder="請輸入手機號"
@@ -73,9 +82,20 @@ export default {
   methods: {
     onLogin () {
       // 獲取表單數據 (根據接口要求綁定數據)
-      const user = this.user
+      // const user = this.user
       // 表單驗證
-      // 驗證通過，提交登入
+      // validate 方法是 異步的
+      // console.log(this.$refs['login-form'])
+      this.$refs['login-form'].validate(valid => {
+        // 如果表單驗證失敗, 停止 請求提交
+        if (!valid) {
+          return
+        }
+        // 表單驗證 通過，提交登入
+        this.login()
+      })
+    },
+    login () {
       // 開啟登入中 loading ...
       this.loginLoading = true
       // 處理後端響應結果
@@ -83,7 +103,7 @@ export default {
         method: 'POST',
         url: '/mp/v1_0/authorizations',
         // data 用來設置POST請求體
-        data: user
+        data: this.user
       }).then(res => {
         console.log(res)
         // 登入成功
