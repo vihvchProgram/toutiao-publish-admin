@@ -57,8 +57,8 @@ export default {
   data () {
     return {
       user: {
-        mobile: '', // 手機號
-        code: '', // 驗證碼
+        mobile: '13911111111', // 手機號
+        code: '246810', // 驗證碼
         agree: false // 是否同意協議的選中狀態
       },
       loginLoading: false, // 登入的 loading 狀態
