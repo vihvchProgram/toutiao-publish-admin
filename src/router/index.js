@@ -17,7 +17,8 @@ const routes = [
   },
   {
     path: '/',
-    name: 'layout',
+    // 如果有 默認子路由, 就不要給 父路由取名字，不然 控制台 會有警告訊息
+    // name: 'layout',
     component: Layout,
     children: [
       {
