@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import request from '@/utils/request'
+import { login } from '@/api/user'
 
 export default {
   name: 'LoginIndex',
@@ -117,12 +117,8 @@ export default {
       // 開啟登入中 loading ...
       this.loginLoading = true
       // 處理後端響應結果
-      request({
-        method: 'POST',
-        url: '/mp/v1_0/authorizations',
-        // data 用來設置POST請求體
-        data: this.user
-      }).then(res => {
+      // 將代碼中的請求操作 都封裝成 函數(方法)，統一管理(@/api/)
+      login(this.user).then(res => {
         console.log(res)
         // 登入成功
         this.$message({
