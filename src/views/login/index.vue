@@ -127,6 +127,11 @@ export default {
         })
         // 關閉 loading
         this.loginLoading = false
+        // 登入成功，頁面跳轉到首頁
+        // this.$router.push('/')
+        this.$router.push({
+          name: 'home'
+        })
       }).catch(err => {
         console.log('登入失敗', err)
         this.$message.error('登入失敗, 手機號或驗證碼錯誤')
