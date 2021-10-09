@@ -64,6 +64,9 @@ export default {
       loginLoading: false, // 登入的 loading 狀態
       formRules: { // 表單驗證的 規則配置
         // 要驗證的數據名稱: 規則列表[]
+        // trigger 配置項: 決定 觸發校驗時機的條件，其有2個選項
+        //  1) change 是當輸入內容 發生變化時觸發
+        //  2) blur   是當表單物件 失去焦點時觸發
         mobile: [
           { required: true, message: '請輸入手機號', trigger: 'change' },
           { pattern: /^1[3|5|7|8|9]\d{9}$/, message: '請輸入正確的手機號碼格式', trigger: 'change' }
