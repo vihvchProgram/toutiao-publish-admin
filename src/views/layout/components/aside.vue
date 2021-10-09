@@ -1,8 +1,9 @@
 <template>
     <!--
-      el-menu 的 router 屬性 :
-        1. 是否使用 vue-router 的模式
+      el-menu 的 "router" 屬性 :
+        1. 是否使用 vue-router 的模式  (開啟 導航菜單的 路由模式)
         2. 啟用該模式會在激活導航時以 index 作為 path 進行路由跳轉
+        3. 必須要注意, index 不要重複。若重複了 路徑跳轉 會錯誤
     -->
     <el-menu
       default-active="/"
