@@ -3,11 +3,13 @@
       <el-aside class="aside" width="200px">
         <AppAside class="aside-menu" />
       </el-aside>
-      <el-container>
-        <el-header class="header">Header</el-header>
+      <el-container  class="main-container">
+        <el-header class="header">
+          <AppHeader class="header-menu" />
+        </el-header>
         <el-main class="main">
           <!-- 子路由出口 -->
-          <router-view />
+          <router-view class="article-content" />
         </el-main>
       </el-container>
     </el-container>
@@ -15,11 +17,13 @@
 
 <script>
 import AppAside from './components/aside'
+import AppHeader from './components/header'
 
 export default {
   name: 'LayoutIndex',
   components: {
-    AppAside
+    AppAside,
+    AppHeader
   },
   props: {},
   data () {
@@ -48,7 +52,13 @@ export default {
     }
   }
   .header {
-    background-color: #B3C0D1;
+    background-color: #FFFFFF;
+    .header-menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+    }
   }
   .main {
     background-color: #E9EEF3;
