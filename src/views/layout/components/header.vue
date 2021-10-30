@@ -6,8 +6,8 @@
     </div>
     <el-dropdown>
       <span class="el-dropdown-link avatar-wrap">
-        <img class="avatar" src="" alt="">
-        <span>用戶暱稱</span>
+        <img class="avatar" :src="user.photo" alt="頭像">
+        <span>{{user.name}}</span>
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
@@ -26,7 +26,10 @@ export default {
   components: {},
   props: {},
   data () {
-    return {}
+    return {
+      // 當前登入的 用戶信息
+      user: {}
+    }
   },
   computed: {},
   watch: {},
@@ -39,9 +42,10 @@ export default {
     // 除了 登入接口以外,若要訪問其它所有接口,都需要被授權,才能 成功請求使用,得到返回數據
     // 意思是 除了登入接口,訪問其它接口 都需要提供你的身分令牌(token),才能獲取資訊(接收到返回數據)
     loadUserProfile () {
-      // getUserProfile()
       getUserProfile().then(res => {
-        console.log(res)
+        // console.log(res)
+        // 拿到 當前登入的 用戶信息
+        this.user = res.data.data
       })
     }
   }
