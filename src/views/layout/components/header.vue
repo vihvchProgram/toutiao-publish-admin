@@ -1,7 +1,10 @@
 <template>
   <div class="header-container">
     <div>
-      <i class="el-icon-s-fold"></i>
+      <i
+        :class="foldStateClass"
+        @click="onChangeFold"
+      ></i>
       <span>內容發佈系統</span>
     </div>
     <el-dropdown>
@@ -20,6 +23,7 @@
 
 <script>
 import { getUserProfile } from '@/api/user'
+import globalBus from '@/utils/global-bus'
 
 export default {
   name: 'AppHeader',
@@ -27,8 +31,9 @@ export default {
   props: {},
   data () {
     return {
-      // 當前登入的 用戶信息
-      user: {}
+      user: {}, // 當前登入的 用戶信息
+      foldStateClass: 'el-icon-s-unfold', // 摺疊字體圖標 類名
+      isFold: false // 摺疊字體圖標 & 側邊菜單欄的 展示狀態
     }
   },
   computed: {},
@@ -47,6 +52,13 @@ export default {
         // 拿到 當前登入的 用戶信息
         this.user = res.data.data
       })
+    },
+    onChangeFold () {
+      // 改變 摺疊 展示狀態
+      this.isFold ? this.foldStateClass = 'el-icon-s-fold' : this.foldStateClass = 'el-icon-s-unfold'
+      this.isFold = !this.isFold
+      // 觸發 'changeCollapse' 自定義事件 ，並 傳遞 this.isFold 數據
+      globalBus.$emit('changeCollapse', this.isFold) // 發佈 事件/消息
     }
   }
 }
