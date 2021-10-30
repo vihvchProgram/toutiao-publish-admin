@@ -11,6 +11,7 @@
       text-color="#fff"
       active-text-color="#ffd04b"
       router
+      :collapse="iscollapse"
     >
       <el-menu-item index="/">
         <i class="el-icon-s-home"></i>
@@ -44,18 +45,35 @@
 </template>
 
 <script>
+import globalBus from '@/utils/global-bus'
+
 export default {
   name: 'AppAside',
   components: {},
   props: {},
   data () {
-    return {}
+    return {
+      iscollapse: false // 側邊菜單欄的 展示狀態
+    }
   },
   computed: {},
   watch: {},
   created () {},
-  mounted () {},
-  methods: {}
+  mounted () {
+    // 註冊 自定義事件(globalBus.$on)
+    // 當有別的組件 發佈這個事件/消息後，這個 '回調函數' 才會被調用
+    globalBus.$on('changeCollapse', this.changeCollapse)
+  },
+  beforeDestroy () {
+    // 解綁 全局事件總線(globalBus)上註冊的 自定義事件
+    globalBus.$off('changeCollapse')
+  },
+  methods: {
+    changeCollapse (isFold) {
+      this.iscollapse = isFold
+      console.log('摺疊狀態改變了', this.iscollapse)
+    }
+  }
 }
 </script>
 
