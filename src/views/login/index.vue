@@ -122,20 +122,27 @@ export default {
       // 處理後端響應結果
       // 將代碼中的請求操作 都封裝成 函數(方法)，統一管理(@/api/)
       login(this.user).then(res => {
-        console.log(res)
         // 登入成功
+        console.log('登入成功', res)
         this.$message({
           message: '登入成功',
           type: 'success'
         })
         // 關閉 loading
         this.loginLoading = false
+
+        // 將接口返回的用戶相關數據 放到本地存儲，方便應用 數據共享
+        // 本地存儲 只能存儲字符串
+        // 如果需要存儲 對象、數組類型的數據，則把它們轉為 JSON格式字符串 進行存儲
+        window.localStorage.setItem('user', JSON.stringify(res.data.data))
+
         // 登入成功，頁面跳轉到首頁
         // this.$router.push('/')
         this.$router.push({
           name: 'home'
         })
       }).catch(err => {
+        // 登入失敗
         console.log('登入失敗', err)
         this.$message.error('登入失敗, 手機號或驗證碼錯誤')
         // 關閉 loading
