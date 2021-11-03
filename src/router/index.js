@@ -34,4 +34,32 @@ const router = new VueRouter({
   routes
 })
 
+// 路由攔截器 (路由導航守衛)
+// 所有頁面的導航 都會經過這裡
+// to: 要前往的 路由信息
+// from: 來自哪裡的 路由信息
+// next: 放行方法
+router.beforeEach((to, from, next) => {
+  // 通過本地存儲 拿到用戶信息
+  // 將拿到的JSON格式字符串還原回 原來的數據對象
+  const user = JSON.parse(window.localStorage.getItem('user'))
+
+  // 如果要訪問的頁面不是 /login，則必須校驗 登入狀態
+  // 如果 還沒登入，會跳轉到 登入頁面 (/login)
+  // 如果 已經登入了，就允許通過
+  if (to.path !== '/login') {
+    // 校驗 非登入頁面的 登入狀態
+    if (user) {
+      // 已登入，允許通過
+      next()
+    } else {
+      // 還沒登入，跳轉到 登入頁面
+      next('/login')
+    }
+  } else {
+    // 訪問 登入頁面，允許通過
+    next()
+  }
+})
+
 export default router
