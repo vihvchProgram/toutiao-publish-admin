@@ -15,7 +15,7 @@
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>個人設置</el-dropdown-item>
-        <el-dropdown-item>退出登入</el-dropdown-item>
+        <el-dropdown-item @click.native="onLogout">退出登入</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </div>
@@ -59,6 +59,29 @@ export default {
       this.isFold = !this.isFold
       // 觸發 'changeCollapse' 自定義事件 ，並 傳遞 this.isFold 數據
       globalBus.$emit('changeCollapse', this.isFold) // 發佈 事件/消息
+    },
+    onLogout () {
+      // 用簡單的 消息提示彈窗
+      // 輕量的展示 "確認提示"
+      this.$confirm('確認退出嗎? ', '退出提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        // 把用戶的登入狀態清除
+        window.localStorage.removeItem('user')
+        // 跳轉到 登入頁面
+        this.$router.push('/login')
+        this.$message({
+          type: 'success',
+          message: '退出登入'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消退出'
+        })
+      })
     }
   }
 }
