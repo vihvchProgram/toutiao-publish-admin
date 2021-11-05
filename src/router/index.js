@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import Login from '@/views/login'
 import Home from '@/views/home'
 import Layout from '@/views/layout'
+import Article from '@/views/article'
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,11 @@ const routes = [
         path: '', // path 為空, 會作為默認子路由渲染
         name: 'home',
         component: Home
+      },
+      {
+        path: '/article',
+        name: 'article',
+        component: Article
       }
     ]
   }
@@ -62,4 +68,5 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+// 我們在組件中使用的 this.$router，其實就是這個模塊中的 這個router
 export default router
