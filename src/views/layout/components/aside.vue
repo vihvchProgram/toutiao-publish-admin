@@ -6,7 +6,7 @@
         3. 必須要注意, index 不要重複。若重複了 路徑跳轉 會錯誤
     -->
     <el-menu
-      default-active="/"
+      :default-active="$route.path"
       background-color="#002033"
       text-color="#fff"
       active-text-color="#ffd04b"
