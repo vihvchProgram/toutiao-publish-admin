@@ -54,26 +54,57 @@
       </div>
 
       <!-- 篩選結果展示 數據列表 -->
+      <!-- 1. 把需要展示的數據列表(數組) 綁定給table組件的data屬性 -->
+      <!--   table組件內部 會自動遍歷 -->
+      <!-- 2. 設計表格列 el-table-column -->
+      <!--   prop:  數據字段 -->
+      <!--   label: 列的標題 -->
+      <!--   width: 列的寬度 -->
       <el-table
-        :data="tableData"
+        :data="articles"
         stripe
         style="width: 100%"
         class="channel-table"
         size="mini"
       >
         <el-table-column
-          prop="date"
-          label="日期"
-          width="180">
+          prop="data"
+          label="封面">
         </el-table-column>
         <el-table-column
-          prop="name"
-          label="姓名"
-          width="180">
+          prop="title"
+          label="標題">
         </el-table-column>
         <el-table-column
-          prop="address"
-          label="地址">
+          label="狀態">
+          <template slot-scope="scope">
+            <el-tag v-if="scope.row.status === 0">草稿</el-tag>
+            <el-tag v-if="scope.row.status === 1">待審核</el-tag>
+            <el-tag v-if="scope.row.status === 2">審核通過</el-tag>
+            <el-tag v-if="scope.row.status === 3">審核失敗</el-tag>
+            <el-tag v-if="scope.row.status === 4">已刪除</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="pubdate"
+          label="發佈日期">
+        </el-table-column>
+        <el-table-column
+          label="操作">
+          <template>
+            <el-button
+              size="mini"
+              type="primary"
+              icon="el-icon-edit"
+              circle
+            ></el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              icon="el-icon-delete"
+              circle
+            ></el-button>
+          </template>
         </el-table-column>
       </el-table>
       <!-- /篩選結果展示 數據列表 -->
@@ -90,6 +121,8 @@
 </template>
 
 <script>
+import { getArticles } from '@/api/article'
+
 export default {
   name: 'ArticleIndex',
   components: {},
@@ -106,30 +139,27 @@ export default {
         resource: '',
         desc: ''
       },
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]
+      articles: [] // 文章數據列表
     }
   },
   computed: {},
   watch: {},
-  created () {},
+  created () {
+    // 當組件初始化好, 即調用loadArticles(),發送請求 獲取文章數據列表
+    this.loadArticles()
+  },
   mounted () {},
-  methods: {}
+  methods: {
+    loadArticles () {
+      getArticles().then(res => {
+        console.log(res)
+        this.articles = res.data.data.results
+      })
+    },
+    onSubmit () {
+      console.log('submit')
+    }
+  }
 }
 </script>
 
