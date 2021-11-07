@@ -46,6 +46,7 @@ const router = new VueRouter({
 // from: 來自哪裡的 路由信息
 // next: 放行方法
 router.beforeEach((to, from, next) => {
+  // 全局前置守衛
   // 通過本地存儲 拿到用戶信息
   // 將拿到的JSON格式字符串還原回 原來的數據對象
   const user = JSON.parse(window.localStorage.getItem('user'))
