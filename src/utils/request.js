@@ -2,6 +2,7 @@
  * 基於axios封裝的請求模塊
  */
 import axios from 'axios'
+import JSONbig from 'json-bigint'
 import router from '@/router'
 
 // 非組件模塊可以 單獨引入使用 element-ui的Message提示組件
@@ -10,7 +11,22 @@ import { Message } from 'element-ui'
 // 創建一個axios實例，說白了就是複製了一個axios
 // 我們通過這個實例去發請求，把需要的配置配置給這個實例來處理
 const request = axios.create({
-  baseURL: 'http://api-toutiao-web.itheima.net' // 請求的基礎路徑
+  baseURL: 'http://api-toutiao-web.itheima.net', // 請求的基礎路徑
+  // 定制 後端返回的 原始數據的處理
+  // 參數data 就是 後端返回的 原始數據 (未經處理的 JSON格式字符串)
+  transformResponse: [function (data) {
+    // Do whatever you want to transform the data
+    // 後端返回的數據 可能不是 JSON格式字符串
+    // 如果 不是JSON格式字符串，那麼 JSONbig.parse調用 就會報錯
+    // 因此 我們使用try-catch 來捕獲異常/處理異常
+    try {
+      // 如果轉換成功，直接把 轉換結果返回
+      return JSONbig.parse(data)
+    } catch (err) {
+      // 如果轉換失敗，則原封不動的 把數據直接返回
+      return data
+    }
+  }]
 })
 
 // axios 請求攔截器
