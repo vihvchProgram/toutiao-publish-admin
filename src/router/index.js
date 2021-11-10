@@ -2,10 +2,26 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // 在 Vue CLI 創建的項目中, @ 表示 src 目錄
-import Login from '@/views/login'
-import Home from '@/views/home'
-import Layout from '@/views/layout'
-import Article from '@/views/article'
+// import Login from '@/views/login/'
+// import Layout from '@/views/layout/'
+// import Home from '@/views/home/'
+// import Article from '@/views/article/'
+// import Image from '@/views/image/'
+// import Publish from '@/views/publish/'
+// import Comment from '@/views/comment/'
+// import Fans from '@/views/fans/'
+// import Settings from '@/views/settings/'
+
+// 藉由 Vue的異步組件 和 Webpack的代碼分割功能 來完成 路由懶加載
+const Login = () => import('@/views/login/')
+const Layout = () => import('@/views/layout/')
+const Home = () => import('@/views/home/')
+const Article = () => import('@/views/article/')
+const Image = () => import('@/views/image/')
+const Publish = () => import('@/views/publish/')
+const Comment = () => import('@/views/comment/')
+const Fans = () => import('@/views/fans/')
+const Settings = () => import('@/views/settings/')
 
 Vue.use(VueRouter)
 
@@ -31,6 +47,31 @@ const routes = [
         path: '/article',
         name: 'article',
         component: Article
+      },
+      {
+        path: '/image',
+        name: 'image',
+        component: Image
+      },
+      {
+        path: '/publish',
+        name: 'publish',
+        component: Publish
+      },
+      {
+        path: '/comment',
+        name: 'comment',
+        component: Comment
+      },
+      {
+        path: '/fans',
+        name: 'fans',
+        component: Fans
+      },
+      {
+        path: '/settings',
+        name: 'settings',
+        component: Settings
       }
     ]
   }
