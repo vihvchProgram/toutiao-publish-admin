@@ -3,13 +3,13 @@
       <el-aside class="aside" width="auto">
         <AppAside class="aside-menu" />
       </el-aside>
-      <el-container  class="main-container">
+      <el-container>
         <el-header class="header">
           <AppHeader class="header-menu" />
         </el-header>
         <el-main class="main">
           <!-- 子路由出口 -->
-          <router-view class="article-content" />
+          <router-view />
         </el-main>
       </el-container>
     </el-container>
