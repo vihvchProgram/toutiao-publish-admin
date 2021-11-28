@@ -29,15 +29,15 @@
         <i class="el-icon-edit-outline"></i>
         <span slot="title">發布文章</span>
       </el-menu-item>
-      <el-menu-item index="comment">
+      <el-menu-item index="/comment">
         <i class="el-icon-document-copy"></i>
         <span slot="title">評論管理</span>
       </el-menu-item>
-      <el-menu-item index="fans">
+      <el-menu-item index="/fans">
         <i class="el-icon-s-custom"></i>
         <span slot="title">粉絲管理</span>
       </el-menu-item>
-      <el-menu-item index="settings">
+      <el-menu-item index="/settings">
         <i class="el-icon-setting"></i>
         <span slot="title">個人設置</span>
       </el-menu-item>
