@@ -12,7 +12,7 @@ import { Message } from 'element-ui'
 // 我們通過這個實例去發請求，把需要的配置配置給這個實例來處理
 const request = axios.create({
   baseURL: 'http://api-toutiao-web.itheima.net', // 請求的基礎路徑
-  // 定制 後端返回的 原始數據的處理
+  // 定制 後端返回的 原始數據的處理方式
   // 參數data 就是 後端返回的 原始數據 (未經處理的 JSON格式字符串)
   transformResponse: [function (data) {
     // Do whatever you want to transform the data
@@ -45,7 +45,7 @@ request.interceptors.request.use(
     if (user) {
       config.headers.Authorization = `Bearer ${user.token}`
     }
-    console.log('配置信息', config)
+    // console.log('配置信息', config)
     // 當 return config 之後，請求 才會真正 發送出去
     return config
   },
