@@ -41,6 +41,22 @@
         <i class="el-icon-setting"></i>
         <span slot="title">個人設置</span>
       </el-menu-item>
+      <el-menu-item index="/ondemand">
+        <i class="el-icon-news"></i>
+        <span slot="title">按需引入</span>
+      </el-menu-item>
+      <el-menu-item index="/listdispl">
+        <i class="el-icon-tickets"></i>
+        <span slot="title">列表顯示</span>
+      </el-menu-item>
+      <el-menu-item index="/chartdispl">
+        <i class="el-icon-reading"></i>
+        <span slot="title">圖表顯示</span>
+      </el-menu-item>
+      <el-menu-item index="/datamanage">
+        <i class="el-icon-document"></i>
+        <span slot="title">資料管理</span>
+      </el-menu-item>
     </el-menu>
 </template>
 
