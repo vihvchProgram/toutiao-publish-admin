@@ -11,6 +11,10 @@ import VueRouter from 'vue-router'
 // import Comment from '@/views/comment/'
 // import Fans from '@/views/fans/'
 // import Settings from '@/views/settings/'
+// import OnDemand from '@/views/ondemand/'
+// import ListDispl from '@/views/listdispl/'
+// import ChartDispl from '@/views/chartdispl/'
+// import DataManage from '@/views/datamanage/'
 
 // 藉由 Vue的異步組件 和 Webpack的代碼分割功能 來完成 路由懶加載
 const Login = () => import('@/views/login/')
@@ -22,6 +26,10 @@ const Publish = () => import('@/views/publish/')
 const Comment = () => import('@/views/comment/')
 const Fans = () => import('@/views/fans/')
 const Settings = () => import('@/views/settings/')
+const OnDemand = () => import('@/views/ondemand/')
+const ListDispl = () => import('@/views/listdispl/')
+const ChartDispl = () => import('@/views/chartdispl/')
+const DataManage = () => import('@/views/datamanage/')
 
 Vue.use(VueRouter)
 
@@ -72,6 +80,26 @@ const routes = [
         path: '/settings',
         name: 'settings',
         component: Settings
+      },
+      {
+        path: '/ondemand',
+        name: 'ondemand',
+        component: OnDemand
+      },
+      {
+        path: '/listdispl',
+        name: 'listdispl',
+        component: ListDispl
+      },
+      {
+        path: '/chartdispl',
+        name: 'chartdispl',
+        component: ChartDispl
+      },
+      {
+        path: '/datamanage',
+        name: 'datamanage',
+        component: DataManage
       }
     ]
   }
