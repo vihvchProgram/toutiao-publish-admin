@@ -1,11 +1,22 @@
 <template>
-  <div class="home-container">首頁</div>
+  <div class="home-container">
+    <MyEcharts width="600px"></MyEcharts>
+    <MyEcharts width="600px"></MyEcharts>
+    <MyEcharts width="600px"></MyEcharts>
+    <MyEcharts width="600px"></MyEcharts>
+    <MyEcharts width="600px"></MyEcharts>
+    <MyEcharts width="600px"></MyEcharts>
+  </div>
 </template>
 
 <script>
+import MyEcharts from '@/components/MyEcharts.vue'
+
 export default {
   name: 'HomeIndex',
-  components: {},
+  components: {
+    MyEcharts
+  },
   props: {},
   data () {
     return {}
